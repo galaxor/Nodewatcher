@@ -140,9 +140,9 @@ DATE_FORMAT = 'Y-m-d H:i:s'
 FORCE_SCRIPT_NAME = ''
 LOGIN_REDIRECT_URL = '/my/nodes'
 LOGIN_URL = '/auth/login'
-RESET_PASSWORD_URL = 'http://example.net/reset_password'
-PROFILE_CONFIGURATION_URL = 'http://example.net/prefs'
-REGISTER_USER_URL = 'http://example.net/register'
+RESET_PASSWORD_URL = '/auth/password/reset'
+PROFILE_CONFIGURATION_URL = '/prefs'
+REGISTER_USER_URL = '/auth/register'
 AUTH_PROFILE_MODULE = 'account.useraccount'
 # We are using SSO with Trac so we have our own auth module, you should probably use something from Django (also to register users)
 # See http://docs.djangoproject.com/en/dev/topics/auth/
@@ -163,6 +163,8 @@ INSTALLED_APPS = (
   'web.dns',
   'web.policy',
   'web.monitor',
+  'registration',
+  'registration_defaults',
 )
 
 # External programs configuration
