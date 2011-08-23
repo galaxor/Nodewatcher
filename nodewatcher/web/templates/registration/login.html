@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load misc %}
+
+{% block title %}{% trans "Login" %}{% endblock %}
+
+{% block heading %}
+{% with _("Login") as heading %}
+{{ block.super }}
+{% endwith %}
+{% endblock %}
+
+{% block contenttype %}login{% endblock %}
+
+{% block ctxtnav %}{% endblock %}
+
+{% block content %}
+<form action="{% url auth_login %}" method="post" id="acctmgr_loginform" >
+{% csrf_token %}
+
+{% if form.non_field_errors %}
+<p class="error">
+  <strong>{% trans "Error" %}:</strong>
+  {% for error in form.non_field_errors %}
+  {{ error }}
+  {% endfor %}
+</p>
+{% endif %}
+<input type="hidden" name="next" value="{{ next }}" />
+<table border="0" class="proptable">
+  <tr>
+    <td class="proplabel">{{ form.username.label_tag }}</td>
+    <td class="propbody">{{ form.username }}</td>
+  </tr>
+  <tr>
+    <td class="proplabel">{{ form.password.label_tag }}</td>
+    <td class="propbody">{{ form.password }}</td>
+  </tr>
+  {% if reset_password_url %}
+  <tr>
+    <td class="proplabel"></td>
+    <td class="propbody propdescription">
+      <a href="{{ reset_password_url }}">Forgot your password?</a>
+    </td>
+  </tr>
+  {% endif %}
+</table>
+<div class="buttons"><input type="submit" value="{% trans "Login" %}" /></div>
+</form>
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript">
+/* <![CDATA[ */
+$(document).ready(function () {
+  $('#id_username')[0].focus();
+});
+/* ]]> */
+</script>
+{% endblock %}

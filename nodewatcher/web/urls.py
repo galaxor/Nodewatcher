@@ -87,9 +87,7 @@ urlpatterns = patterns('',
   url(r'^generator/request/(?P<node>.*)$', 'web.generator.views.request', name = 'generate_node'),
 
   # Authentication
-  url(r'^auth/login$', 'django.contrib.auth.views.login', { 'template_name' : 'auth/login.html' }, name = 'auth_login'),
-  url(r'^auth/logout$', 'django.contrib.auth.views.logout_then_login', name = 'auth_logout'),
-  url(r'^auth/$', lambda request: redirect('auth_login', permanent=True)),
+  url(r'^auth/', include('registration.backends.default.urls')),
 )
 
 handler500 = 'web.nodes.views.server_error'
